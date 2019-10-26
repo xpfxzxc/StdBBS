@@ -1,0 +1,75 @@
+<div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
+  <div class="card">
+    <h5 class="card-header">注册</h5>
+    <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-group row">
+          <label for="name" class="col-md-4 col-form-label text-md-right">用户名</label>
+          <div class="col-md-6">
+            <input type="name" class="form-control" id="name" formControlName="name" [ngClass]="{ 'is-invalid': f.name.touched && f.name.errors }" autofocus autocomplete="off">
+            <div *ngIf="f.name.touched && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">请输入用户名</div>
+              <div *ngIf="f.name.errors.minlength">用户名不能小于3字符</div>
+              <div *ngIf="f.name.errors.maxlength">用户名不能大于25字符</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail 地址</label>
+          <div class="col-md-6">
+            <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors, 'is-valid': f.email.valid }" autocomplete="off">
+            <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">请输入 E-Mail 地址</div>
+              <div *ngIf="f.email.errors.email">请输入合法 E-Mail 地址</div>
+              <div *ngIf="f.email.errors.emailIsAvailable">该 E-Mail 地址已被注册</div>
+            </div>
+            <div *ngIf="f.email.valid" class="valid-feedback">
+              该 E-Mail 地址可用
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-md-4 col-form-label text-md-right">密码</label>
+          <div class="col-md-6">
+            <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" placeholder="6-16个字符组成，区分大小写">
+            <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">请输入密码</div>
+              <div *ngIf="f.password.errors.minlength">密码不能小于6字符</div>
+              <div *ngIf="f.password.errors.maxlength">密码不能大于16字符</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="confirmPassword" class="col-md-4 col-form-label text-md-right">确认密码</label>
+          <div class="col-md-6">
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': f.confirmPassword.touched && f.confirmPassword.errors }">
+            <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors" class="invalid-feedback">
+              <div *ngIf="f.confirmPassword.errors.required">请输入确认密码</div>
+              <div *ngIf="f.confirmPassword.errors.mustMatch">两次密码输入必须一致</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="captcha" class="col-md-4 col-form-label text-md-right">验证码</label>
+          <div class="col-md-6">
+            <input type="" class="form-control" id="captcha" formControlName="captcha" [ngClass]="{ 'is-invalid': f.captcha.touched && f.captcha.errors, 'is-valid': f.captcha.valid }" autocomplete="off">
+            <div *ngIf="f.captcha.touched && f.captcha.errors" class="invalid-feedback">
+              <div *ngIf="f.captcha.errors.required">请输入验证码</div>
+              <div *ngIf="f.captcha.errors.minlength || f.captcha.errors.maxlength">验证码长度为6个字符</div>
+              <div *ngIf="f.captcha.errors.isCaptchaRight">验证码输入错误</div>              
+            </div>
+            <div class="mt-3">
+              <app-captcha (load)="onCaptchaRefresh()"></app-captcha>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <button type="submit" class="btn btn-primary mt-3" [disabled]="!registerForm.valid || submitting">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            注册{{ submitting ? '中...' : '' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

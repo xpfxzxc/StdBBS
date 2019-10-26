@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+
+import APP from '../../common/constants/app.constant';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  brandName = APP.NAME;
   collapsed = true;
 
-  constructor() {}
+  constructor(private readonly router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.collapsed = true;
+      }
+    });
+  }
 }
