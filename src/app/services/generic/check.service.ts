@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import APP from '../../common/constants/app.constant';
 import { JsonResponse } from '../../common/modals/json-response';
+import { User } from '../../modules/users/user';
 
 const checkBaseUrl = `${APP.API_BASE_URL}/generic/check`;
 
@@ -24,5 +25,11 @@ export class CheckService {
     return this.http
       .get<JsonResponse>(`${checkBaseUrl}/email`, { params: { email } })
       .pipe(map(({ code }: JsonResponse) => code === 0));
+  }
+
+  isLoggedIn(): Observable<User> {
+    return this.http
+      .get<JsonResponse>(`${checkBaseUrl}/login`)
+      .pipe(map(res => (res.code === 0 ? new User(res.data['user']) : null)));
   }
 }
