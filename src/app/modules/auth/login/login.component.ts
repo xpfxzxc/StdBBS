@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 import { AuthService } from '../auth.service';
 import { CaptchaComponent } from '../../captcha/captcha.component';
@@ -39,16 +40,18 @@ export class LoginComponent implements OnInit {
     this.failed = false;
     this.submitting = true;
 
-    this.authService.login(this.loginForm.value).subscribe(successful => {
-      if (successful) {
-        const redirect = this.authService.redirectUrl;
-        this.router.navigateByUrl(!redirect || redirect === '/login' ? '/' : redirect);
-      } else {
-        this.failed = true;
-        this.captchaComponent.refresh();
-      }
-      this.submitting = false;
-    });
+    this.authService
+      .login(this.loginForm.value)
+      .pipe(finalize(() => (this.submitting = false)))
+      .subscribe(successful => {
+        if (successful) {
+          const redirect = this.authService.redirectUrl;
+          this.router.navigateByUrl(!redirect || redirect === '/login' ? '/' : redirect);
+        } else {
+          this.failed = true;
+          this.captchaComponent.refresh();
+        }
+      });
   }
 
   ngOnInit() {

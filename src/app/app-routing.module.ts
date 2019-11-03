@@ -12,11 +12,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./modules/auth/auth.module').then(mod => mod.AuthModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./modules/users/users.module').then(mod => mod.UsersModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

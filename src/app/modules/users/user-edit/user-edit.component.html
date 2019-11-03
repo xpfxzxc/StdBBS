@@ -1,0 +1,73 @@
+<div class="col-md-8 offset-md-2">
+  <div class="card">
+    <div class="card-header">
+      <h4>
+        <i class="fas fa-edit"></i> 编辑个人资料
+      </h4>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="userUpdateForm" (ngSubmit)="update()">
+        <div class="form-group">
+        <label for="name" class="col-form-label">用户名</label>
+          <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{ 'is-invalid': f.name.errors }" value="{{ user.name }}" autocomplete="off">
+          <div *ngIf="f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">请输入用户名</div>
+            <div *ngIf="f.name.errors.minlength">用户名不能小于3字符</div>
+            <div *ngIf="f.name.errors.maxlength">用户名不能大于25字符</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="col-form-label">E-Mail 地址</label>
+          <input type="text" class="form-control" id="email" value="{{ user.email }}" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="col-form-label">密码</label>
+          <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors}">
+          <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.minlength">密码不能小于6字符</div>
+            <div *ngIf="f.password.errors.maxlength">密码不能大于16字符</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="col-form-label">确认密码</label>
+          <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': f.confirmPassword.touched && f.confirmPassword.errors }">
+          <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.mustMatch">两次密码输入必须一致</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="introduction">个人简介</label>
+          <textarea class="form-control" id="introduction" formControlName="introduction" [ngClass]="{ 'is-invalid': f.introduction.errors }" rows="3">{{ user.introduction }}</textarea>
+          <div *ngIf="f.introduction.errors" class="invalid-feedback">
+            <div *ngIf="f.introduction.errors.maxlength">个人简介不能大于80字符</div>
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="avatar">用户头像</label>
+          <input type="file" (change)="onFileChange($event)" class="form-control-file" id="avatar" accept="image/png, image/jpg, image/gif, image/jpeg">
+          <div *ngIf="f.avatar.value && f.avatar.errors">
+            <div *ngIf="f.avatar.errors.extension">文件扩展名需是 png、jpg、gif、jpeg</div>
+            <div *ngIf="f.avatar.errors.maxSize">图像大小不能超过 1000Kb</div>
+            <div *ngIf="f.avatar.errors.image">您上传的不是图片</div>
+            <div *ngIf="f.avatar.errors.imageDimension">图片的清晰度不够，宽和高都需要 200px 以上</div>
+          </div>
+          <ng-container *ngIf="user.avatar">
+            <br>
+            <img class="thumbnail img-responsive" src="{{ user.avatar }}" width="200">
+          </ng-container>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="!userUpdateForm.dirty || !userUpdateForm.valid || submitting">
+          <span *ngIf="submitting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          保存{{ submitting ? '中...' : '' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

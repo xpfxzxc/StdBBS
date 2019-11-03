@@ -8,6 +8,7 @@ import { LoginBody } from './interfaces/login-body.interface';
 import { User } from '../users/user';
 import APP from '../../common/constants/app.constant';
 import { JsonResponse } from '../../common/modals/json-response';
+import { CheckService } from '../../services/generic/check.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class AuthService {
   user: User;
   redirectUrl: string;
 
-  constructor(private readonly http: HttpClient, private readonly router: Router) {
+  constructor(
+    private readonly checkService: CheckService,
+    private readonly http: HttpClient,
+    private readonly router: Router
+  ) {
     this.router.events
       .pipe(
         filter((event: any) => event instanceof NavigationEnd),
@@ -38,8 +43,21 @@ export class AuthService {
 
   logout(): Observable<void> {
     return this.http.post<JsonResponse>(`${APP.API_BASE_URL}/logout`, null).pipe(
-      tap(res => (res.code === 0 ? (this.user = null) : this.user)),
+      tap(res => {
+        if (res.code === 0) {
+          this.user = null;
+          this.router.navigateByUrl(this.router.url);
+        }
+      }),
       map(_ => undefined)
+    );
+  }
+
+  reload(): Observable<void> {
+    return this.checkService.isLoggedIn().pipe(
+      map(user => {
+        this.user = user;
+      })
     );
   }
 }

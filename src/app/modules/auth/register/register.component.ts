@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 import { AlertService } from '../../alert/alert.service';
+import { CaptchaComponent } from '../../captcha/captcha.component';
 import { UserService } from '../../users/user.service';
 import { MustMatch } from '../../../common/validators/must-match.validator';
 import { CaptchaIsRightValidator } from '../../../common/validators/captcha-is-right.validator';
@@ -15,6 +17,8 @@ import { TitleService } from '../../../services/title.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild(CaptchaComponent, { static: false }) private captchaComponent: CaptchaComponent;
+  failed = false;
   registerForm = this.fb.group(
     {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
@@ -56,13 +60,22 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.failed = false;
     this.submitting = true;
 
-    this.userService.addUser(this.registerForm.value).subscribe(() => {
-      this.submitting = false;
+    this.userService
+      .addUser(this.registerForm.value)
+      .pipe(finalize(() => (this.submitting = false)))
+      .subscribe(user => {
+        if (user) {
+          this.alertService.success('注册成功！');
+          this.router.navigateByUrl('/');
+        } else {
+          this.failed = true;
 
-      this.alertService.success('注册成功！');
-      this.router.navigateByUrl('/');
-    });
+          this.captchaComponent.refresh();
+          this.registerForm.get('email').reset();
+        }
+      });
   }
 }

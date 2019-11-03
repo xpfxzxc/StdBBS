@@ -2,6 +2,9 @@
   <div class="card">
     <h5 class="card-header">注册</h5>
     <div class="card-body">
+      <div *ngIf="failed" class="alert alert-danger" role="alert">
+        有意外发生，请重新输入 E-Mail 地址和验证码。
+      </div>
       <form [formGroup]="registerForm" (ngSubmit)="register()">
         <div class="form-group row">
           <label for="name" class="col-md-4 col-form-label text-md-right">用户名</label>

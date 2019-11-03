@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-3 d-none d-md-block">
+    <div class="card">
+      <img class="card-img-top" src="{{ user.avatar || 'http://gravatar.com/avatar?d=mp' }}" alt="{{ user.name }}">
+      <div class="card-body">
+        <h5><strong>个人简介</strong></h5>
+        <p>{{ user.introduction }}</p>
+        <hr>
+        <h5><strong>注册于</strong></h5>
+        <p>{{ user.createdAt | amLocale: 'zh-cn' | amTimeAgo }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="mb-0" style="font-size: 22px">{{ user.name }} <small>{{ user.email }}</small></h1>
+      </div>
+    </div>
+    
+    <hr>
+
+    <div class="card">
+      <div class="card-body">
+        暂无数据 ~_~
+      </div>
+    </div>
+  </div>
+</div>
