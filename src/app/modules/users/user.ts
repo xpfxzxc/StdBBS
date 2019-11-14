@@ -1,3 +1,5 @@
+import { Topic } from "../topics/topic";
+
 export class User {
   avatar: string;
   createdAt: Number;
@@ -5,8 +7,10 @@ export class User {
   id: number;
   introduction: string;
   name: string;
+  topics?: Topic[];
+  updatedAt: number;
 
-  constructor(init: Required<User>) {
+  constructor(init: Partial<User>) {
     Object.assign(this, init);
   }
 }

@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-9 topics">
+    <div class="card">
+      <div class="card-header bg-transparent">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a [routerLink]="[]" [queryParams]="{ order: null }" class="nav-link" [class.active]="order === null">最后回复</a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="[]" [queryParams]="{ order: 'recent' }" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">最新发布</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-body">
+        <app-topic-list [topics]="pagination.items"></app-topic-list>
+        <div *ngIf="pagination.totalItems > 0" class="mt-4">
+          <ngb-pagination [page]="page" [pageSize]="pageSize" [collectionSize]="pagination.totalItems" [rotate]="true" (pageChange)="onPageChange($event)"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 sidebar">
+    <div class="card">
+      <div class="card-body">
+        <a routerLink="/topics/create" class="btn btn-success btn-block"><i class="fas fa-pencil-alt mr-2"></i> 新建帖子</a>
+      </div>
+    </div>
+  </div>
+</div>

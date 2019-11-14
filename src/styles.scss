@@ -1,10 +1,12 @@
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~easymde/dist/easymde.min.css";
+@import "~prismjs/themes/prism-tomorrow.css";
 
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/brands';
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
 
 /* 全局 */
 html {
@@ -14,5 +16,164 @@ html {
 
 body {
   margin-bottom: 60px; // 为底部空出位置
-  font-family: Helvetica, 'Microsoft YaHei', Arial, sans-serif;
+  font-family: Helvetica, "Microsoft YaHei", Arial, sans-serif;
+}
+
+/* Markdown 显示 */
+$font-size-base: 14px;
+$heading-1-size: ceil($font-size-base * 2.71);
+$heading-2-size: ceil($font-size-base * 2.14);
+$heading-3-size: ceil($font-size-base * 1.71);
+$heading-4-size: ceil($font-size-base * 1.42);
+$code-family: monaco, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+.markdown-body,
+.editor-preview {
+  background: white;
+  font-size: 16px;
+  line-height: 1.6;
+
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+  }
+
+  blockquote {
+    padding: 16px;
+    border-left: 8px solid #9dc9ec;
+    margin: 20px 0;
+    background-color: #e8f8f9;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  code {
+    padding: 1px 3px 1px;
+    border: 1px solid #e4e4e4;
+    border-radius: 4px;
+    margin: 5px;
+    color: #858080;
+    background-color: rgba(90, 87, 87, 0);
+  }
+
+  dl,
+  ol,
+  ul {
+    margin-top: 0;
+    margin-bottom: 1em;
+    line-height: 30px;
+
+    dl,
+    ol,
+    ul {
+      margin-bottom: 0;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    position: relative;
+    margin-top: 1em;
+    margin-bottom: 16px;
+  }
+
+  h1,
+  h2 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: $heading-1-size;
+  }
+
+  h2 {
+    font-size: $heading-2-size;
+  }
+
+  h3 {
+    font-size: $heading-3-size;
+  }
+
+  h4 {
+    font-size: $heading-4-size;
+  }
+
+  img {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+
+  ol ol {
+    list-style: lower-roman;
+  }
+
+  > p {
+    margin-top: 0;
+    margin-bottom: 1em;
+    color: #636b6f;
+  }
+
+  pre {
+    padding: 24px;
+    margin: 1.2em 0;
+    color: #ccc;
+    background-color: #2d2d2d;
+
+    code {
+      overflow: initial;
+      padding: 0;
+      border: none;
+      margin: 0;
+      color: #ccc;
+      background-color: transparent;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 20px 0;
+
+    td,
+    th {
+      border: 1px solid #ddd;
+      padding: 5px;
+    }
+
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    tr:nth-child(2n) {
+      background-color: #f4f4f4;
+    }
+  }
 }

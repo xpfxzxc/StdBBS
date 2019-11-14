@@ -1,0 +1,39 @@
+<ul *ngIf="topics.length > 0" class="list-unstyled">
+  <ng-container *ngFor="let topic of topics; last as isLast">
+    <li class="media">
+      <a [routerLink]="['/users', topic.user.id]"><img src="{{ topic.user.avatar }}" class="author-avatar mr-3 img-thumbnail" title="{{ topic.user.name }}"></a>
+  
+      <div class="media-body">
+        <h5 class="mt-0 mb-1">
+          <a [routerLink]="['/topics', topic.id]" title="{{ topic.title }}">{{ topic.title }}</a>
+          <a [routerLink]="['/topics', topic.id]" class="float-right"><span class="badge badge-pill badge-secondary">{{ topic.replyCount }}</span></a>
+        </h5>
+        <div class="meta text-secondary">
+          <a [routerLink]="['/categories', topic.category.id]" class="text-secondary" title="{{ topic.category }}">
+            <i class="far fa-folder"></i>
+            {{ topic.category.name }}
+          </a>
+  
+          <span> • </span>
+  
+          <a [routerLink]="['/users', topic.user.id]" class="text-secondary" title="{{ topic.user.name }}">
+            <i class="far fa-user"></i>
+            {{ topic.user.name }}
+          </a>
+  
+          <span> • </span>
+  
+          <i class="far fa-clock"></i>
+          <span class="timeago" title="最后活跃于：{{ topic.updatedAt | amLocale: 'zh-cn' | amDateFormat: 'YYYY年MMMDo HH时mm分ss秒' }}">
+            {{ topic.updatedAt | amLocale: 'zh-cn' | amTimeAgo }}
+          </span>
+        </div>
+      </div>
+    </li>
+    <hr *ngIf="!isLast">
+  </ng-container>
+</ul>
+
+<div *ngIf="topics.length === 0" class="empty-block">
+  暂无数据 ~_~
+</div>

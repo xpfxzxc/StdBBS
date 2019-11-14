@@ -6,6 +6,16 @@
     </button>
 
     <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/topics" routerLinkActive="active">话题</a>
+        </li>
+        
+        <li *ngFor="let category of categories" class="nav-item">
+          <a class="nav-link" [routerLink]="['/categories', category.id]" routerLinkActive="active">{{ category.name }}</a>
+        </li>
+      </ul>
+
       <ul class="navbar-nav ml-auto">
         <ng-container *ngIf="!user">
           <li class="nav-item">
@@ -16,6 +26,9 @@
           </li>
         </ng-container>
         <ng-container *ngIf="user">
+          <li class="nav-item">
+            <a routerLink="/topics/create" class="nav-link mt-1 mr-3 font-weight-bold"><i class="fa fa-plus"></i></a>
+          </li>
           <li class="nav-item" ngbDropdown>
             <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown" role="button">
               <img src="{{ user.avatar || 'http://gravatar.com/avatar?d=mp' }}" width="30" height="30">

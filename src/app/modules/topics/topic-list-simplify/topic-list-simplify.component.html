@@ -1,0 +1,12 @@
+<ul *ngIf="topics.length > 0" class="list-group list-group-flush">
+  <li *ngFor="let topic of topics" class="list-group-item">
+    <a [routerLink]="['/topics', topic.id]">{{ topic.title }}</a>
+    <span class="float-right text-secondary">
+      {{ topic.replyCount }} 回复
+      <span> ⋅ </span>
+      {{ topic.createdAt | amLocale: 'zh-cn' | amTimeAgo }}
+    </span>
+  </li>
+</ul>
+
+<div *ngIf="topics.length === 0" class="empty-block">暂无数据 ~_~ </div>

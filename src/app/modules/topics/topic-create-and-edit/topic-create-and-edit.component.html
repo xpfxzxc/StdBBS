@@ -1,0 +1,38 @@
+<div class="col-md-10 offset-md-1">
+  <div class="card">
+    <div class="card-body">
+      <h2><i class="far fa-edit"></i> {{ title }}</h2>
+      
+      <hr>
+
+      <form [formGroup]="topicCreateAndEditForm" (ngSubmit)="addOrUpdate()">
+        <div class="form-group">
+          <input type="text" class="form-control" id="title" formControlName="title" [ngClass]="{ 'is-invalid': f.title.touched && f.title.errors }" placeholder="请填写标题" autocomplete="off">
+          <div *ngIf="f.title.errors" class="invalid-feedback">
+            <div *ngIf="f.title.errors.minlength">标题不能少于2个字符</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" formControlName="categoryId">
+            <option [value]="null" hidden disabled selected>请选择分类</option>
+            <option *ngFor="let category of categoryService.categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <textarea class="form-control" appMarkdownEditor (valueChange)="onBodyChange($event)" [uploadEndpoint]="uploadEndpoint"
+            fileFieldName="image" jsonName="data.imageUrl" [beforeUpload]="beforeUpload"
+            rows="6" placeholder="请填入至少三个字符的内容。（支持通过拖拽和粘贴上传图片，图片大小不超过2MB）">{{ body }}</textarea>
+          <div *ngIf="f.body.errors" class="invalid-feedback">
+            <div *ngIf="f.body.errors.minlength">内容不能少于3个字符</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="!topicCreateAndEditForm.valid ||!topicCreateAndEditForm.dirty || submitting">
+          <i class="far fa-save mr-2" aria-hidden="true"></i> 提交{{ submitting ? '中...' : '' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

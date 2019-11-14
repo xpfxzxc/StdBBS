@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ImageService {
   constructor() {}
@@ -18,7 +18,7 @@ export class ImageService {
           subscriber.complete();
         };
         image.onerror = err => {
-          subscriber.error('图片加载失败');
+          subscriber.error("图片加载失败");
         };
         image.src = fr.result as string;
       };
