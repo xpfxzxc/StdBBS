@@ -33,7 +33,7 @@ export class TopicEditResolverService implements Resolve<Topic> {
         if (!topic) {
           this.router.navigateByUrl("/topics");
           return EMPTY;
-        } else if (topic.user.id !== this.authService.user.id) {
+        } else if (!this.authService.user.isAuthorOf(topic)) {
           this.router.navigate(["/topics", id]);
           return EMPTY;
         } else {

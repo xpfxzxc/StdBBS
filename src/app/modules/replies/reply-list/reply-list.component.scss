@@ -1,0 +1,19 @@
+.topic-reply {
+  a {
+    color: inherit;
+  }
+
+  .meta {
+    font-size: 0.9em;
+    color: #b3b3b3;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .trash-btn {
+    cursor: pointer;
+  }
+}

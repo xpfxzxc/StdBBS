@@ -1,0 +1,27 @@
+<li class="media">
+  <a [routerLink]="['/users', notification.data['userId']]">
+    <img class="img-thumbnail mr-3" alt="{{ notification.data['userName'] }}" 
+      src="{{ notification.data['userAvatar'] || 'http://gravatar.com/avatar?d=mp' }}" style="width:48px;height:48px">
+  </a>
+
+  <div class="media-body">
+    <div class="mt-0 mb-1 text-secondary">
+      <a [routerLink]="['/users', notification.data['userId']]">
+        {{ notification.data['userName'] }}
+      </a>
+      评论了
+      <a [routerLink]="['/topics', notification.data['topicId']]" fragment="{{ 'reply' + notification.data['replyId'] }}">
+        {{ notification.data['topicTitle'] }}
+      </a>
+
+      <span class="meta float-right" title="{{ notification.createdAt | amLocale: 'zh-cn' | amDateFormat: 'YYYY年MMMDo HH时mm分ss秒' }}">
+        <i class="far fa-clock"></i>
+        {{ notification.createdAt | amLocale: 'zh-cn' | amTimeAgo }}
+      </span>
+    </div>
+
+    <div class="reply-content">
+      {{ notification.data['replyContent'] }}
+    </div>
+  </div>
+</li>

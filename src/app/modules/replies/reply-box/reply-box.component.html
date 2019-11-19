@@ -1,0 +1,8 @@
+<form [formGroup]="replyForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <textarea class="form-control" formControlName="content" rows="3" placeholder="分享你的见解~"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary btn-sm" [disabled]="replyForm.invalid || submitting">
+    <i class="fa fa-share mr-1"></i> 回复
+  </button>
+</form>

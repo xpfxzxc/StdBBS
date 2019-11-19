@@ -10,6 +10,7 @@ import { TopicListComponent } from "./topic-list/topic-list.component";
 import { TopicListSimplifyComponent } from "./topic-list-simplify/topic-list-simplify.component";
 import { TopicsComponent } from "./topics/topics.component";
 import { TopicsResolverService } from "./topics/topics-resolver.service";
+import { RepliesModule } from "../replies/replies.module";
 import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
@@ -21,7 +22,7 @@ import { SharedModule } from "../../shared/shared.module";
     TopicsComponent
   ],
   exports: [TopicListSimplifyComponent, TopicsComponent],
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, RepliesModule, SharedModule, RouterModule],
   providers: [
     TopicDetailResolverService,
     TopicEditResolverService,

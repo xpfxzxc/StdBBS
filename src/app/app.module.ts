@@ -4,6 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { sanitize } from "dompurify";
 import { CookieService } from "ngx-cookie-service";
 import { MarkdownModule, MarkedOptions } from "ngx-markdown";
+import { SocketIoModule } from "ngx-socket-io";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -53,7 +54,8 @@ declare var Prism: {
         }
       }
     }),
-    SharedModule
+    SharedModule,
+    SocketIoModule
   ],
   providers: [appInitializerProviders, CookieService, interceptorProviders],
   bootstrap: [AppComponent]

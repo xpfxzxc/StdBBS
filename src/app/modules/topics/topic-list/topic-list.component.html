@@ -1,7 +1,7 @@
 <ul *ngIf="topics.length > 0" class="list-unstyled">
   <ng-container *ngFor="let topic of topics; last as isLast">
     <li class="media">
-      <a [routerLink]="['/users', topic.user.id]"><img src="{{ topic.user.avatar }}" class="author-avatar mr-3 img-thumbnail" title="{{ topic.user.name }}"></a>
+      <a [routerLink]="['/users', topic.user.id]"><img src="{{ topic.user.avatar || 'http://gravatar.com/avatar?d=mp' }}" class="author-avatar mr-3 img-thumbnail" title="{{ topic.user.name }}"></a>
   
       <div class="media-body">
         <h5 class="mt-0 mb-1">

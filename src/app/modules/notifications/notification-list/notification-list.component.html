@@ -1,0 +1,12 @@
+<ul *ngIf="notifications.length > 0" class="list-unstyled notification-list">
+  <ng-container *ngFor="let notification of notifications; last as isLast">
+    <ng-container [ngSwitch]="notification.type">
+      <notification-topic-replied *ngSwitchCase="'topicReplied'" [notification]="notification"></notification-topic-replied>
+    </ng-container>
+    <hr *ngIf="!isLast">
+  </ng-container>
+</ul>
+
+<div *ngIf="notifications.length === 0" class="empty-block">
+  没有消息通知！
+</div>

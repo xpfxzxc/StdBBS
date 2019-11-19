@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import { Subject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Router, NavigationStart } from "@angular/router";
+import { Subject } from "rxjs";
+import { filter } from "rxjs/operators";
 
-import { Alert } from './alert';
-import { AlertType } from './alert.enum';
-import { AlertOptions } from './alert-options.interface';
-import { AlertConfig } from './alert-config.interface';
+import { Alert } from "./alert";
+import { AlertType } from "./alert.enum";
+import { AlertOptions } from "./alert-options.interface";
+import { AlertConfig } from "./alert-config.interface";
 
 @Injectable()
 export class AlertService {
@@ -19,12 +19,12 @@ export class AlertService {
   }
 
   constructor(private config: AlertConfig = {}, private router: Router) {
-    this.mode = config.mode || 'flash';
+    this.mode = config.mode || "flash";
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         if (this.keepAfterRouteChange) {
-          if (this.mode === 'flash') {
+          if (this.mode === "flash") {
             this.keepAfterRouteChange = false;
           }
         } else {
@@ -50,7 +50,7 @@ export class AlertService {
     this.alert(this.makeAlert(message, AlertType.Primary, options));
   }
 
-  setMode(newMode: 'clear' | 'flash' | 'keep') {
+  setMode(newMode: "clear" | "flash" | "keep") {
     this.mode = newMode;
   }
 
@@ -67,11 +67,15 @@ export class AlertService {
   }
 
   private alert(alert: Alert) {
-    this.keepAfterRouteChange = this.mode !== 'clear';
+    this.keepAfterRouteChange = this.mode !== "clear";
     this.subject.next(alert);
   }
 
-  private makeAlert = (message: string, type: AlertType, options: AlertOptions = {}) => {
+  private makeAlert = (
+    message: string,
+    type: AlertType,
+    options: AlertOptions = {}
+  ) => {
     return new Alert({
       message,
       type,

@@ -1,4 +1,5 @@
 import { Category } from "../categories/category";
+import { Reply } from "../replies/reply";
 import { User } from "../users/user";
 
 export class Topic {
@@ -8,13 +9,14 @@ export class Topic {
   id: number;
   lastReplyUser?: User;
   order: number;
+  replies: Reply[];
   replyCount: number;
   title: string;
   updatedAt: number;
   user?: User;
   viewCount: number;
 
-  constructor(init: Partial<Topic>) {
+  constructor(init: Topic) {
     Object.assign(this, init);
   }
 }

@@ -28,6 +28,13 @@ const routes: Routes = [
       import("./modules/categories/categories.module").then(
         mod => mod.CategoriesModule
       )
+  },
+  {
+    path: "notifications",
+    loadChildren: () =>
+      import("./modules/notifications/notifications.module").then(
+        mod => mod.NotificationsModule
+      )
   }
 ];
 

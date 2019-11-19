@@ -19,6 +19,11 @@ body {
   font-family: Helvetica, "Microsoft YaHei", Arial, sans-serif;
 }
 
+/* 分页 */
+.pagination {
+  flex-wrap: wrap;
+}
+
 /* Markdown 显示 */
 $font-size-base: 14px;
 $heading-1-size: ceil($font-size-base * 2.71);

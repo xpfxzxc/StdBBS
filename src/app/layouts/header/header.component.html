@@ -29,6 +29,11 @@
           <li class="nav-item">
             <a routerLink="/topics/create" class="nav-link mt-1 mr-3 font-weight-bold"><i class="fa fa-plus"></i></a>
           </li>
+          <li class="nav-item notification-badge">
+            <a routerLink="notifications" class="nav-link mr-3 badge badge-pill text-white badge-{{ user.notificationCount > 0 ? 'hint' : 'secondary' }}">
+              {{ user.notificationCount }}
+            </a>
+          </li>
           <li class="nav-item" ngbDropdown>
             <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown" role="button">
               <img src="{{ user.avatar || 'http://gravatar.com/avatar?d=mp' }}" width="30" height="30">

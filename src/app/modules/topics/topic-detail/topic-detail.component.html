@@ -11,7 +11,7 @@
         <div class="media">
           <div class="mx-auto">
             <a [routerLink]="['/users', topic.user.id]">
-              <img class="thumbnail img-fluid" src="{{ topic.user.avatar }}" width="300px" height="300px">
+              <img class="thumbnail img-fluid" src="{{ topic.user.avatar || 'http://gravatar.com/avatar?d=mp' }}" width="300px" height="300px">
             </a>
           </div>
         </div>
@@ -35,7 +35,7 @@
 
         <div markdown class="markdown-body my-4" [data]="topic.body"></div>
 
-        <div *ngIf="topic.user.id === authService.user.id" class="operate">
+        <div *ngIf="authService.user && authService.user.isAuthorOf(topic)" class="operate">
           <hr>
           <button [routerLink]="['/topics', topic.id, 'edit']" class="btn btn-outline-secondary btn-sm" role="button">
             <i class="far fa-edit"></i> 编辑
@@ -44,6 +44,18 @@
             <i class="far fa-trash-alt"></i> 删除
           </button>
         </div>
+      </div>
+    </div>
+
+    <div class="card topic-reply mt-4">
+      <div class="card-body">
+        <ng-container *ngIf="authService.user">
+          <app-reply-box [topicId]="topic.id" (addReply)="onAddReply($event)"></app-reply-box>
+
+          <hr>
+        </ng-container>
+
+        <app-reply-list [replies]="replies" [topic]="topic" (deleteReply)="onDeleteReply($event)"></app-reply-list>
       </div>
     </div>
   </div>

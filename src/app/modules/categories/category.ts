@@ -7,7 +7,7 @@ export class Category {
   postCount: number;
   topics?: Topic[];
 
-  constructor(init: Partial<Category>) {
+  constructor(init: Category) {
     Object.assign(this, init);
   }
 }

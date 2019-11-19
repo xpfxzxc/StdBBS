@@ -1,0 +1,6 @@
+<div class="mt-4">
+  <app-reply-list-simplify [replies]="userReplies"></app-reply-list-simplify>
+  <div *ngIf="totalUserReplies > 0" class="mt-4">
+    <ngb-pagination [page]="page" [pageSize]="pageSize" [collectionSize]="totalUserReplies" [rotate]="true" (pageChange)="onPageChange($event)"></ngb-pagination>
+  </div>
+</div>

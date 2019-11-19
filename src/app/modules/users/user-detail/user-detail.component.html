@@ -25,9 +25,11 @@
       <div class="card-body">
         <ngb-tabset>
           <ngb-tab title="Ta 的帖子">
-              <ng-template ngbTabContent><app-user-topics></app-user-topics></ng-template>
+            <ng-template ngbTabContent><app-user-topics></app-user-topics></ng-template>
           </ngb-tab>
-          <ngb-tab title="Ta 的回复"></ngb-tab>
+          <ngb-tab title="Ta 的回复">
+            <ng-template ngbTabContent><app-user-replies></app-user-replies></ng-template>
+          </ngb-tab>
         </ngb-tabset>
       </div>
     </div>

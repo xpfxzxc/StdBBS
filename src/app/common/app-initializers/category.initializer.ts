@@ -1,5 +1,5 @@
-import { CategoryService } from '../../modules/categories/category.service';
+import { CategoryService } from "../../modules/categories/category.service";
 
-export function CategoryProviderFactory(provider: CategoryService) {
+export function categoryProviderFactory(provider: CategoryService) {
   return () => provider.load();
 }

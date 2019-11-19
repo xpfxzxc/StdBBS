@@ -1,0 +1,19 @@
+<ul *ngIf="replies.length > 0" class="list-group list-group-flush">
+  <li *ngFor="let reply of replies" class="list-group-item pl-2 pr-2" >
+    <a [routerLink]="['/topics', reply.topic.id]" fragment="{{ 'reply' + reply.id }}">
+      {{ reply.topic.title }}
+    </a>
+
+    <div class="reply-content text-secondary mt-2 mb-2">
+      {{ reply.content }}
+    </div>
+
+    <div class="text-secondary" style="font-size: .9em">
+      <i class="far fa-clock"> 回复于 {{ reply.createdAt | amLocale: 'zh-cn' | amTimeAgo }}</i>
+    </div>
+  </li>
+</ul>
+
+<div *ngIf="replies.length === 0" class="empty-block">
+  暂无数据 ~_~ 
+</div>

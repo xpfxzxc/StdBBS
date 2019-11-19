@@ -45,7 +45,8 @@ const TopicsRoutes: Routes = [
     component: TopicDetailComponent,
     resolve: {
       topic: TopicDetailResolverService
-    }
+    },
+    runGuardsAndResolvers: "always"
   }
 ];
 

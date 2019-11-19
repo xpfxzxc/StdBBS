@@ -1,0 +1,17 @@
+<div class="col-md-10 offset-md-1">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="text-sm-left text-center">
+        <i class="far fa-bell" aria-hidden="true"></i> 我的通知
+      </h3>
+
+      <hr>
+      
+      <app-notification-list [notifications]="pagination.items"></app-notification-list>
+      <div *ngIf="pagination.totalItems > 0" class="mt-4">
+        <ngb-pagination [page]="page" [pageSize]="pageSize" [collectionSize]="pagination.totalItems" [rotate]="true" (pageChange)="onPageChange($event)"></ngb-pagination>
+      </div>
+
+    </div>
+  </div>
+</div>
