@@ -24,7 +24,7 @@
     "dompurify": "^2.0.7",
     "easymde": "^2.8.0",
     "lodash-es": "^4.17.15",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "moment": "^2.24.0",
     "ngx-cookie-service": "^2.2.0",
     "ngx-markdown": "^8.2.1",
